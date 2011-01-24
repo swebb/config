@@ -1,0 +1,63 @@
+#//////////////////////////////////////////////////////////////////////
+#//Useful aliases
+#//////////////////////////////////////////////////////////////////////
+	alias ls='/bin/ls --color=auto --group-directories-first'
+	alias gvim='/usr/bin/gvim -p $* >& /dev/null'
+	alias rm='/bin/rm -i'
+	alias nautilus='/usr/bin/nautilus .'
+
+	#really useful when compiling.  Used bty other aliases.
+	alias slash="echo=///////////////////////////////////////////////////////////////"
+
+	#use the associated gnome application to open a file
+	alias open="gnome-open"
+
+	#recursive grep without svn directories
+	alias g="egrep --exclude=\*.svn\* -r -n "
+
+	#create a drop shadow
+	dropshadow() {convert $1 \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -mosaic $2}
+
+	#java stuff
+	#alias java="slash; $javaversion/bin/java $*"
+	#alias javac="slash; $javaversion/bin/javac $* |& more"
+	#alias javadoc="slash; $javaversion/bin/javadoc $* |& more"
+	#alias appletviewer="slash; $javaversion/bin/appletviewer $*"
+	#setenv CLASSPATH .:$HOME/bin/Class:$HOME/bin/Class/junit4.1/junit-4.1.jar:$HOME/bin/Class/junit4.1:/usr/local/share/classes:$HOME/h/java/
+
+	#use Great Britan spelling for aspell
+	#setenv ASPELL_CONF "master en_GB"
+	export ASPELL_CONF="lang en_GB"
+	#I usually only use this for html
+	alias aspell="/usr/bin/aspell --mode=html -c"
+
+	#alias -r g++="clear; (/usr/bin/g++ -g -Wall -o main $*) 2>&1 | more"
+	g++() { clear; /usr/bin/g++ -g -Wall -o main "$*" 2>&1 | more; }
+	alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
+	alias make="clear; slash; /usr/bin/make $*"
+	alias m="clear; slash; /usr/bin/make |& more"
+	alias ddd="/usr/bin/ddd $* &"
+
+	alias beep="notify-send 'beep'; mplayer /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"	
+
+#//////////////////////////////////////////////////////////////////////
+#//Background aliases
+#//////////////////////////////////////////////////////////////////////
+
+	#acrobat reader
+	evince() {/usr/bin/evince $* &}
+	gftp() {/usr/bin/gftp $* &}
+	gimp() {/usr/bin/gimp $* &}
+	inkscape() {/usr/bin/inkscape $* &}
+
+	#for eog (open the current directory)
+	alias eog="/usr/bin/eog . &"
+
+	#for region 1 dvds
+	#setenv DVDCSS_METHOD key
+	#setenv DVDCSS_RAW_DEVICE /dev/hdc
+	#setenv DVDCSS_VERBOSE 2
+
+	#for gnuplot
+	#setenv GDFONTPATH /usr/share/fonts/truetype/freefont/
+	#alias gnuplot='/usr/local/bin/gnuplot --persist $*'
