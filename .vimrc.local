@@ -26,7 +26,7 @@ set ignorecase
 
 "use ! after a variable name to unset a variable
 "e.g.
-"set number!
+set number!
 
 "display's the ruler at the bottom of the screen
 set ruler
