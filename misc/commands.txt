@@ -1,122 +1,228 @@
-#to save a disk image
-dd if=/dev/hda of=teh_entire_disk.img
+######################################################################
+#APT
+######################################################################
+		#to list all installed packages (grep them)
+		dpkg --get-selections
+		#or
+		dpkg -l regex
 
-#to copy over an entire partition (e.g. copy to a new hd)
-#need to re-set up the bootloader. boot in with a boot disk (knoppix), chroot, install grub
-cp -dfxpRv
+		#to remove configuration files
+		apt-get remove --purge 
+######################################################################
+#GIT
+######################################################################
+		#Create a git repository for the current directory.
+		git init
+		git status
+		#Add all files and changes under the cwd
+		git add .
+		#commit all files in the working copy
+		git commit -a
+		#checkout
+		git clone url
+		#fetch and merge a remote branch
+		git pull
+		#remove all random files from the working copy (doesn't remove versioned and ignored files).
+		git clean -f
+		#restore the previous copy of a file or a directory
+		git checkout path
+		#revert to head. Use -f to overwrite local changes.
+		git checkout -f
 
-#to record off the radio
-rec -c 2 -r 22050 -s w test.wav
 
-#to strip out the rythmbox filenames
-#cat Exercise.m3u |  grep "^File" |  sed -e "s/File[0-9]*=\(.*\)/\1/" |  perl -e 'print map {$_->[1]} sort {$a->[0]<=>$b->[0]} map {[rand,$_]} <>' |  sed -e "s/\//\\\//" | sed -e "s/ /\\ /" | sed -e "s/^/cp /" |  sed -e "s/\n/ \/media\/usbdisk\//" > Playlist.m3u
-cat Exercise.m3u |  grep "^File" |  sed -e "s/File[0-9]*=\(.*\)/\1/" |  perl -e 'print map {$_->[1]} sort {$a->[0]<=>$b->[0]} map {[rand,$_]} <>' | sed -e "s/ /\\ /g" -e "s/(/\\(/g" -e "s/)/\\)/g" -e "s/'/\\'/g" | sed -e "s/^/cp /" |  sed -e 's/$/ \/media\/usbdisk\//' | grep -v .ogg > Playlist.m3u
-cat Exercise.m3u |  grep "^File" |  sed -e "s/File[0-9]*=\(.*\)/\1/" |  perl -e 'print map {$_->[1]} sort {$a->[0]<=>$b->[0]} map {[rand,$_]} <>' | sed -e "s/ /\\ /g" -e "s/(/\\(/g" -e "s/)/\\)/g" -e "s/'/\\'/g" | grep -v .ogg > Playlist3.m3u
+		#standard commands
+		git add file
+		git rm file
+		git mv file
 
-#transform text files to move files
-%s/\([ ()']\)/\\\1/g
-%s/^\(.*\)$/mv \1 \1/g
+		#undo a previous commit
+		git revert "HEAD^"
+		#go back to an earlier version
+		git reset "HEAD^"
 
-#to list all installed packages (grep them)
-dpkg --get-selections
-#or
-dpkg -l regex
+		#create a tag
+		git tag -a name
+		#list tags
+		git tag -l
+		git show tag
 
-#to remove configuration files
-apt-get remove --purge 
+		#//////////////////////////////////////////////////////////////////////
+		#branching and margeing
+		#//////////////////////////////////////////////////////////////////////
+		#create a new branch and switch to it
+		git checkout -b <branch name>
+		#merging. Switch to branch you want to merge to.
+		git checkout master
+		#specify the branch you want to merge into this one.
+		git merge <branch name>
+		#delete the unnecessary old branch
+		git branch -d <branch name>
+		#if you want to delete a branch you haven't merged
+		git branch -D <branch name>
 
-#to install grub in mbr from knoppix
-mount the root directory (/dev/sda6 in this case)
-sudo grub-install --root-directory=/media/XXX-XXX-XXX /dev/sda --recheck
+		#//////////////////////////////////////////////////////////////////////
+		#git configuration
+		#//////////////////////////////////////////////////////////////////////
+		git config --global user.name "Steven Webb"
+		git config --global user.email steven.daniel.webb@gmail.com
+		git config --global color.diff auto
+		git config --global color.status auto
+		git config --global color.branch auto
+		git config --global core.editor "gvim -f"
 
-#print double sided (duplex)
-mpage -1 -t -Php4-2 filename
-pdf2ps filename | mpage -1 -t -Php4-2
+		#----------------------------------------------------------------------
+		#When using the master branch the default remote is origin. When doing a pull,
+		#if remote and branch are not specified using origin and master.
+		#----------------------------------------------------------------------
+		git config branch.master.remote origin
+		git config branch.master.merge refs/heads/master
 
-#split oggs
-mp3splt -t 5.0 -o "name-@n" name.ogg
+		#----------------------------------------------------------------------
+		#Useful for bluehost where the path is not set correctly
+		#----------------------------------------------------------------------
+		git config remote.origin.receivepack /home2/attitue1/bin/git-receive-pack
+		git config remote.origin.uploadpack /home2/attitue1/bin/git-upload-pack  
 
-#java profiling
-java -Xrunhprof:file=output.txt,cpu=samples Simulator -numNodes 100 -architecture DHT
+		#//////////////////////////////////////////////////////////////////////
+		#setting up a remote repository
+		#//////////////////////////////////////////////////////////////////////
+		#----------------------------------------------------------------------
+		#on server in target directory
+		#----------------------------------------------------------------------
+		git --bare init
+		#----------------------------------------------------------------------
+		#on client
+		#----------------------------------------------------------------------
+		git remote add origin ssh://server.com/path_to_target
+		#pushing to the master (on the origin update the master)
+		git push origin master
+		#clone the repository to make it local.
+		git clone url
+		#get the lastest version of the master branch from origin
+		git pull origin master
 
-#compile with debugging symbols
-./configure CPPFLAGS=-DDEBUG
-./configure CPPFLAGS=-DDEBUG=1
+		#----------------------------------------------------------------------
+		#remote commands
+		#----------------------------------------------------------------------
+		git remote add origin ssh://server/path
+		git remote rm origin
 
-#burn iso's
-cdrecord -driveropts=burnfree -v -dev /dev/hdc ubuntu-6.06-desktop-i386.iso; eject /dev/cdrom
+######################################################################
+#SVN
+######################################################################
+#MISC COMMANDS
+######################################################################
+	#to save a disk image
+	dd if=/dev/hda of=teh_entire_disk.img
 
-#to ssh without a passwd
-#generate the  passwords on the client
-ssh-keygen -t dsa
-#copy the public key to the server
-scp id_dsa.pub hostname:/home/webbsd
-#connect to the host
-ssh hostname
-#add it to the authorized file
-cat ~/id_dsa.pub ~/.ssh/authorized_keys
+	#to copy over an entire partition (e.g. copy to a new hd)
+	#need to re-set up the bootloader. boot in with a boot disk (knoppix), chroot, install grub
+	cp -dfxpRv
 
-#recursive sed (replace all instances of 4 spaces with a tab
-find . -name "*.java" -exec sed -i -e 's/    /\t/g' {} \;
+	#to record off the radio
+	rec -c 2 -r 22050 -s w test.wav
 
-#sync home area to three
-rsync -a ~ three:/home
+	#to strip out the rythmbox filenames
+	#cat Exercise.m3u |  grep "^File" |  sed -e "s/File[0-9]*=\(.*\)/\1/" |  perl -e 'print map {$_->[1]} sort {$a->[0]<=>$b->[0]} map {[rand,$_]} <>' |  sed -e "s/\//\\\//" | sed -e "s/ /\\ /" | sed -e "s/^/cp /" |  sed -e "s/\n/ \/media\/usbdisk\//" > Playlist.m3u
+	cat Exercise.m3u |  grep "^File" |  sed -e "s/File[0-9]*=\(.*\)/\1/" |  perl -e 'print map {$_->[1]} sort {$a->[0]<=>$b->[0]} map {[rand,$_]} <>' | sed -e "s/ /\\ /g" -e "s/(/\\(/g" -e "s/)/\\)/g" -e "s/'/\\'/g" | sed -e "s/^/cp /" |  sed -e 's/$/ \/media\/usbdisk\//' | grep -v .ogg > Playlist.m3u
+	cat Exercise.m3u |  grep "^File" |  sed -e "s/File[0-9]*=\(.*\)/\1/" |  perl -e 'print map {$_->[1]} sort {$a->[0]<=>$b->[0]} map {[rand,$_]} <>' | sed -e "s/ /\\ /g" -e "s/(/\\(/g" -e "s/)/\\)/g" -e "s/'/\\'/g" | grep -v .ogg > Playlist3.m3u
 
-#sync home area to one
-rsync -a ~ one:/home/webbsd
+	#transform text files to move files
+	%s/\([ ()']\)/\\\1/g
+	%s/^\(.*\)$/mv \1 \1/g
 
-#vnc
-vncviwerer -via IP grannys:0
+	#to install grub in mbr from knoppix
+	mount the root directory (/dev/sda6 in this case)
+	sudo grub-install --root-directory=/media/XXX-XXX-XXX /dev/sda --recheck
 
-#make a package downloaded via apt
-dpkg-buildpackage -rfakeroot -uc -b
+	#print double sided (duplex)
+	mpage -1 -t -Php4-2 filename
+	pdf2ps filename | mpage -1 -t -Php4-2
 
-#rip and convert a real-player stream using mplayer
-mplayer -dumpstream "rtsp://XXX.rm" -dumpfile filename.rm
-mplayer -vo null -vc dummy -ao pcm:waveheader:file=XXX.wav XXX.rm
+	#split oggs
+	mp3splt -t 5.0 -o "name-@n" name.ogg
 
-#converts an eps figure to a png
-convert -density 300 srs-1.eps -flatten srs-1.png
-convert -density 300 -rotate 90 srs-1.eps -flatten srs-1.png
-convert -density 300 inconsistency1.svg -flatten -trim inconsistency1.png
+	#java profiling
+	java -Xrunhprof:file=output.txt,cpu=samples Simulator -numNodes 100 -architecture DHT
 
-#using apt-get for source packages
-#download
-apt-get source packagename
-#from inside the package directory, build it with:
-dpkg-buildpackage -rfakeroot -uc -b
-#to install the dependencies for building a package
-apt-get build-dep packagename
+	#compile with debugging symbols
+	./configure CPPFLAGS=-DDEBUG
+	./configure CPPFLAGS=-DDEBUG=1
 
-#svn create a repository (usually on hammer)
-svnadmin create --fs-type fsfs /home/user/svn
-#initial import
-svn import /path/to/project/ file:///home/user/svn/project/trunk -m 'Initial import'
-#checkout copy
-svn checkout file:///home/user/svn/project
-svn checkout svn+ssh://hammer/usr/student/tango/webbsd/svn/project
-#which files are new or have been modified
-svn status
-#add 'file' to the respository
-svn add file
-#commit changes to the repository (do an update first)
-svn update
-svn commit -m "message"
-#ignore files in the project directory. Can use * as a wild card.
-svn propedit svn:ignore ./some_path
-#print out the contents of a repository (from withing hammer:~/svn)
-svnlook tree .
-#Set up the permissions for a svn repository. Assume svn_grp exists and the user is a member.
-chgrp svn_grp -R repository
-find repository -type d -exec chmod g+rws {} \;
-find repository -type f -perm 600 -exec chmod 660 {} \;
-find repository -type f -perm 400 -exec chmod 440 {} \;
-#to check out an old version
-svn update -r <rev> <file>
+	#burn iso's
+	cdrecord -driveropts=burnfree -v -dev /dev/hdc ubuntu-6.06-desktop-i386.iso; eject /dev/cdrom
 
-#to rename upper case to lower case
-rename 'y/A-Z/a-z/' *
+	#to ssh without a passwd
+	#generate the  passwords on the client
+	ssh-keygen -t dsa
+	#copy the public key to the server
+	scp id_dsa.pub hostname:/home/webbsd
+	#connect to the host
+	ssh hostname
+	#add it to the authorized file
+	cat ~/id_dsa.pub ~/.ssh/authorized_keys
 
-#backup laptop to external hd
-rsync -a /home/webbsd /media/disk/Backup/home/
-rsync -a /volatile/webbsd /media/disk/Backup/volatile/
+	#recursive sed (replace all instances of 4 spaces with a tab
+	find . -name "*.java" -exec sed -i -e 's/    /\t/g' {} \;
+
+	#sync home area to three
+	rsync -a ~ three:/home
+
+	#sync home area to one
+	rsync -a ~ one:/home/webbsd
+
+	#vnc
+	vncviwerer -via IP grannys:0
+
+	#make a package downloaded via apt
+	dpkg-buildpackage -rfakeroot -uc -b
+
+	#rip and convert a real-player stream using mplayer
+	mplayer -dumpstream "rtsp://XXX.rm" -dumpfile filename.rm
+	mplayer -vo null -vc dummy -ao pcm:waveheader:file=XXX.wav XXX.rm
+
+	#converts an eps figure to a png
+	convert -density 300 srs-1.eps -flatten srs-1.png
+	convert -density 300 -rotate 90 srs-1.eps -flatten srs-1.png
+	convert -density 300 inconsistency1.svg -flatten -trim inconsistency1.png
+
+	#using apt-get for source packages
+	#download
+	apt-get source packagename
+	#from inside the package directory, build it with:
+	dpkg-buildpackage -rfakeroot -uc -b
+	#to install the dependencies for building a package
+	apt-get build-dep packagename
+
+	#svn create a repository (usually on hammer)
+	svnadmin create --fs-type fsfs /home/user/svn
+	#initial import
+	svn import /path/to/project/ file:///home/user/svn/project/trunk -m 'Initial import'
+	#checkout copy
+	svn checkout file:///home/user/svn/project
+	svn checkout svn+ssh://hammer/usr/student/tango/webbsd/svn/project
+	#which files are new or have been modified
+	svn status
+	#add 'file' to the respository
+	svn add file
+	#commit changes to the repository (do an update first)
+	svn update
+	svn commit -m "message"
+	#ignore files in the project directory. Can use * as a wild card.
+	svn propedit svn:ignore ./some_path
+	#print out the contents of a repository (from withing hammer:~/svn)
+	svnlook tree .
+	#Set up the permissions for a svn repository. Assume svn_grp exists and the user is a member.
+	chgrp svn_grp -R repository
+	find repository -type d -exec chmod g+rws {} \;
+	find repository -type f -perm 600 -exec chmod 660 {} \;
+	find repository -type f -perm 400 -exec chmod 440 {} \;
+	#to check out an old version
+	svn update -r <rev> <file>
+
+	#to rename upper case to lower case
+	rename 'y/A-Z/a-z/' *
+
+	#backup laptop to external hd
+	rsync -a /home/webbsd /media/disk/Backup/home/
+	rsync -a /volatile/webbsd /media/disk/Backup/volatile/

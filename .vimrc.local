@@ -53,13 +53,13 @@ set visualbell
 "enable syntax highlighting
 syntax on
 
-"place a line of dashes across the screen (useful to sperate methods)
+"useful sparators
 map <F2> i//----------------------------------------------------------------------<ESC>
 imap <F2> //----------------------------------------------------------------------
-
-"place a line of slashes across the screen (useful to seperate classes)
 map <F3> i//////////////////////////////////////////////////////////////////////<ESC>
 imap <F3> //////////////////////////////////////////////////////////////////////
+map <F4> i######################################################################<ESC>
+imap <F4> ######################################################################
 
 "used to make headings in latex
 "map <F5> 0i\chapter{<ESC>A}<ESC>
