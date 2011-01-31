@@ -1,28 +1,27 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt extendedglob
-unsetopt beep
-#The following line sets vi mode
-bindkey -v
+# Path to your oh-my-zsh configuration.
+export ZSH=$HOME/.oh-my-zsh
 
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/steve/.zshrc'
+# Set to the name theme to load.
+# Look in ~/.oh-my-zsh/themes/
+export ZSH_THEME="robbyrussell"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Set to this to use case-sensitive completion
+# export CASE_SENSITIVE="true"
 
-#show mode for vi command line
-#function zle-line-init zle-keymap-select {
-#    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-#    RPS2=$RPS1
-#    zle reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git vi-mode)
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+#bindkey -v
 
 #change colors
 eval `dircolors -b ~/.dir_colors`
@@ -33,7 +32,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #turn off group and world permissions by default.
 umask 077
 
-prompt='%m:%c/>'
+#prompt='%m:%c/>'
 
 source ~/.alias-zshrc
 
