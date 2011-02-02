@@ -12,6 +12,7 @@ if [[ "$HOST" == "two" ]]; then
 #Work machine (OSX)
 elif [[ "$HOST" == "Steven-Webbs-iMac.local" ]]; then
 	alias gvim='/usr/local/bin/mvim -p $* >& /dev/null'
+	alias gvimdiff='/usr/local/bin/mvim -d $* >& /dev/null'
 fi
 
 #//////////////////////////////////////////////////////////////////////
