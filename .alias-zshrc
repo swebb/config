@@ -1,16 +1,27 @@
 #//////////////////////////////////////////////////////////////////////
-#//Useful aliases
+#//Host specific aliases
 #//////////////////////////////////////////////////////////////////////
+#
+#Home machine (Linux)
+if [[ "$HOST" == "two" ]]; then
 	alias ls='/bin/ls --color=auto --group-directories-first'
 	alias gvim='/usr/bin/gvim -p $* >& /dev/null'
+
+	#use the associated gnome application to open a file
+	alias open="gnome-open"
+#Work machine (OSX)
+elif [[ "$HOST" == "Steven-Webbs-iMac.local" ]]; then
+	alias gvim='/usr/local/bin/mvim -p $* >& /dev/null'
+fi
+
+#//////////////////////////////////////////////////////////////////////
+#//Useful aliases
+#//////////////////////////////////////////////////////////////////////
 	alias rm='/bin/rm -i'
 	alias nautilus='/usr/bin/nautilus .'
 
 	#really useful when compiling.  Used bty other aliases.
 	alias slash="echo=///////////////////////////////////////////////////////////////"
-
-	#use the associated gnome application to open a file
-	alias open="gnome-open"
 
 	#recursive grep without svn directories
 	alias g="egrep --exclude=\*.svn\* -r -n "

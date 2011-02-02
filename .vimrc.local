@@ -120,7 +120,14 @@ filetype plugin on
 "enable folding
 set foldmethod=indent
 
-set guifont=Monospace\ 14
+if has('win32')
+		"windows config
+elseif has('mac')
+	set guifont=Menlo:h14
+elseif has('unix')
+	set guifont=Monospace\ 14
+endif
+
 
 colorscheme steve
 
