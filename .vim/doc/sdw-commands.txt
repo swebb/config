@@ -111,10 +111,11 @@ On client >
 	git remote add origin ssh://server.com/path_to_target
 pushing to the master (on the origin update the master) >
 	git push origin master
-clone the repository to make it local. >
-	git clone url
-get the lastest version of the master branch from origin >
-	git pull origin master
+to set the default location to push/pull from add the following to
+.git/config >
+  [branch "master"]
+	  remote = origin
+	  merge = refs/heads/master
 >>>
 ----------------------------------------------------------------------
 Remote commands <<<
