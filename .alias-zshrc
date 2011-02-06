@@ -9,6 +9,10 @@ if [[ "$HOST" == "two" ]]; then
 
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
+
+	alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
+	alias umount-iphone="fusermount -u /media/iPhone"
+
 #Work machine (OSX)
 elif [[ "$HOST" == "Steven-Webbs-iMac.local" ]]; then
 	alias gvim='/usr/local/bin/mvim -p $* >& /dev/null'
