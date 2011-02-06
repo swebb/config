@@ -61,14 +61,6 @@ imap <F3> //////////////////////////////////////////////////////////////////////
 map <F4> i######################################################################<ESC>
 imap <F4> ######################################################################
 
-"used to make headings in latex
-"map <F5> 0i\chapter{<ESC>A}<ESC>
-"map <F6> 0i\section{<ESC>A}<ESC>
-"map <F7> 0i\item{<ESC>A}<ESC>
-
-"Used to format the abstract for the wiki
-"vmap <F8> :s/-\n//g<CR>:'<,'>s/\n/ /g<CR>/aaaaaaaaaaaaaaaaaaaaaa<CR>
-
 "stop linewrapping
 set nowrap
 
@@ -77,16 +69,6 @@ set nowrap
 
 map <F1> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
-
-"map <F1> i\emph{<ESC>ea}<ESC>
-"imap <F1> \emph{<ESC>ea}<ESC>
-
-"bibtex
-"map <F11> i@inproceedings{0001,<CR><ESC>xxi        author = {},<CR><ESC>xxi        title = {},<CR><ESC>xxi        booktitle = {},<CR><ESC>xxi        year = {},<CR><ESC>xxi<CR><ESC>xxi        editor = {},<CR><ESC>xxi        pages = {},<CR><ESC>xxi        organization = {},<CR><ESC>xxi        publisher = {},<CR><ESC>xxi        address = {},<CR><ESC>xxi        month = {},<CR><ESC>xxi        note = {},<CR><ESC>xxi        key = {}<CR><ESC>xxi}<CR><ESC>
-"imap <F11> @inproceedings{0001,<CR><ESC>xxi        author = {},<CR><ESC>xxi        title = {},<CR><ESC>xxi        booktitle = {},<CR><ESC>xxi        year = {},<CR><ESC>xxi<CR><ESC>xxi        editor = {},<CR><ESC>xxi        pages = {},<CR><ESC>xxi        organization = {},<CR><ESC>xxi        publisher = {},<CR><ESC>xxi        address = {},<CR><ESC>xxi        month = {},<CR><ESC>xxi        note = {},<CR><ESC>xxi        key = {}<CR><ESC>xxi}<CR>
-
-"map <F12> i@article{0001,<CR><ESC>xxi        author = {},<CR><ESC>xxi        title = {},<CR><ESC>xxi        journal = {},<CR><ESC>xxi        year = {},<CR><ESC>xxi<CR><ESC>xxi        volume = {},<CR><ESC>xxi        number = {},<CR><ESC>xxi        pages = {},<CR><ESC>xxi        month = {},<CR><ESC>xxi        note = {},<CR><ESC>xxi        key = {}<CR><ESC>xxi}<CR><ESC>
-"imap <F12> @article{0001,<CR><ESC>xxi        author = {},<CR><ESC>xxi        title = {},<CR><ESC>xxi        journal = {},<CR><ESC>xxi        year = {},<CR><ESC>xxi<CR><ESC>xxi        volume = {},<CR><ESC>xxi        number = {},<CR><ESC>xxi        pages = {},<CR><ESC>xxi        month = {},<CR><ESC>xxi        note = {},<CR><ESC>xxi        key = {}<CR><ESC>xxi}<CR>
 
 "set the width for tabs
 "set tabstop=4
@@ -105,22 +87,37 @@ set noexpandtab
 "let spell_language = "en_GB"
 "let spell_auto_type = ""
 
-"controlling tabs in vim 7
-nmap <C-h> :tabprevious<cr>
-nmap <C-l> :tabnext<cr>
-map <C-h> :tabprevious<cr>
-map <C-l> :tabnext<cr>
-imap <C-h> :tabprevious<cr>
-imap <C-l> :tabnext<cr>
-nmap <C-t> :tabnew<cr>
-imap <C-t> <ESC>:tabnew<cr> 
-
 filetype plugin on
 
 "enable folding
 set foldmethod=indent
 
-set guifont=Monospace\ 14
+if has('win32')
+		"windows config
+elseif has('mac')
+	set guifont=Menlo:h14
+
+	nmap <C-h> :wincmd h<cr>
+	nmap <C-l> :wincmd l<cr>
+	nmap <C-j> :wincmd j<cr>
+	nmap <C-k> :wincmd k<cr>
+
+elseif has('unix')
+	set guifont=Monospace\ 14
+
+	"controlling tabs
+	nmap <C-h> :tabprevious<cr>
+	nmap <C-l> :tabnext<cr>
+	nmap <C-t> :tabnew<cr>
+	map <C-h> :tabprevious<cr>
+	map <C-l> :tabnext<cr>
+	map <C-t> :tabnew<cr>
+	imap <C-h> :tabprevious<cr>
+	imap <C-l> :tabnext<cr>
+	imap <C-t> <ESC>:tabnew<cr> 
+
+endif
+
 
 colorscheme steve
 

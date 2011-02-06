@@ -3,30 +3,6 @@ SDW COMMANDS  *sdw-commands*
 
 Rebuild the help tags with: >
 	:helptags ~/.vim/doc
-
-======================================================================
-APT *APT* *sdw-APT* <<<
-
-to list all installed packages (grep them) >
-	dpkg --get-selections
-or >
-	dpkg -l regex
-to remove configuration files >
-	apt-get remove --purge 
-
-Using apt-get for source packages
-download: >
-	apt-get source packagename
-from inside the package directory, build it with: >
-	dpkg-buildpackage -rfakeroot -uc -b
-to install the dependencies for building a package >
-	apt-get build-dep packagename
-
-compile with debugging symbols (not really apt) >
-	./configure CPPFLAGS=-DDEBUG
-	./configure CPPFLAGS=-DDEBUG=1
-
->>>
 ======================================================================
 GIT *sdw-GIT* <<<
 ----------------------------------------------------------------------
@@ -123,6 +99,52 @@ Remote commands <<<
 	git remote rm origin
 >>>
 >>> >>>
+======================================================================
+RVM <<<
+
+install ruby 1.9.2 >
+  rvm install 1.9.2
+use ruby 1.9.2 >
+  rvm use 1.9.2
+set the default rvm to use >
+  rvm use 1.9.2 --default
+use ruby 1.9.2 with gemset name >
+  rvm use 1.9.2@name
+list all rubies >
+  rvm list
+create gemset >
+  rvm use 1.9.2@name --create
+list all gemsets FOR THE CURRENT RUBY >
+  rvm gemset list
+list current ruby@gemset >
+  rvm tools identifier
+delete a gemset >
+  rvm gemset delete <gemset>
+
+>>>
+======================================================================
+APT *APT* *sdw-APT* <<<
+
+to list all installed packages (grep them) >
+	dpkg --get-selections
+or >
+	dpkg -l regex
+to remove configuration files >
+	apt-get remove --purge 
+
+Using apt-get for source packages
+download: >
+	apt-get source packagename
+from inside the package directory, build it with: >
+	dpkg-buildpackage -rfakeroot -uc -b
+to install the dependencies for building a package >
+	apt-get build-dep packagename
+
+compile with debugging symbols (not really apt) >
+	./configure CPPFLAGS=-DDEBUG
+	./configure CPPFLAGS=-DDEBUG=1
+
+>>>
 ======================================================================
 SVN *SVN* *sdw-SVN* <<<
 
