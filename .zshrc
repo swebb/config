@@ -60,10 +60,10 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle :compinstall filename '/home/steve/.zshrc'
 
-bindkey '^[j' menu-complete
-bindkey '^[k' menu-complete
-bindkey '^[l' menu-complete
-bindkey '^[h' menu-complete
+#bindkey '^[j' menu-complete
+#bindkey '^[k' menu-complete
+#bindkey '^[l' menu-complete
+#bindkey '^[h' menu-complete
 
 bindkey -M menuselect '^[j' down-history
 bindkey -M menuselect '^[k' up-history

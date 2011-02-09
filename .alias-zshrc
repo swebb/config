@@ -48,12 +48,12 @@ fi
 	alias aspell="/usr/bin/aspell --mode=html -c"
 
 	#alias -r g++="clear; (/usr/bin/g++ -g -Wall -o main $*) 2>&1 | more"
-	g++() { clear; /usr/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
-	gcc() { clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
+	g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
+	gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
 	#alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
 	alias make="clear; slash; /usr/bin/make $*"
 	alias m="clear; slash; /usr/bin/make |& more"
-	alias ddd="/usr/bin/ddd $* &"
+	ddd() { /usr/bin/ddd "$@" & }
 
 	alias beep="notify-send 'beep'; mplayer /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"	
 
