@@ -45,8 +45,8 @@ zle -N zle-keymap-select
 umask 077
 
 #prompt='%m:%c/>'
-prompt='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-#prompt='%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[red]%}➜ % %{$reset_color%}'
+#prompt='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+prompt='%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$fg_bold[green]%}%p%{$fg[cyan]%}%c %{$fg_bold[red]%}➜ % %{$reset_color%}'
 
 source ~/.alias-zshrc
 
