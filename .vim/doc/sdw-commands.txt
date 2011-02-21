@@ -43,6 +43,9 @@ list tags >
 	git tag -l
 	git show tag
 
+unstage all staged changes
+git reset HEAD
+
 >>>
 ----------------------------------------------------------------------
 Branching and merging	<<<

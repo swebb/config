@@ -118,7 +118,6 @@ elseif has('unix')
 
 endif
 
-
 colorscheme steve
 
 "Use ctrl-n to turn highlighting of searches on and off.
