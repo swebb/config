@@ -139,3 +139,11 @@ set directory^=$HOME/.vim_swap//
 
 let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
+
+"set _ as a word boundary
+set iskeyword-=_
+"remove # as a word boundary (#defines)
+set iskeyword+=#
+
+"open help in new tab
+cabbrev help tab help
