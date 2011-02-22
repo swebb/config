@@ -105,6 +105,11 @@ elseif has('mac')
 elseif has('unix')
 	set guifont=Monospace\ 14
 
+	nmap <M-h> :wincmd h<cr>
+	nmap <M-l> :wincmd l<cr>
+	nmap <M-j> :wincmd j<cr>
+	nmap <M-k> :wincmd k<cr>
+
 	"controlling tabs
 	nmap <C-h> :tabprevious<cr>
 	nmap <C-l> :tabnext<cr>
@@ -147,3 +152,6 @@ set iskeyword+=#
 
 "open help in new tab
 cabbrev help tab help
+
+"disable alt keys for menu items
+set winaltkeys=no
