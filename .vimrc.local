@@ -140,7 +140,7 @@ endfunction
 map <F6> :diffput<CR>
 map <F7> :diffget<CR>
 
-set directory^=$HOME/.vim_swap//
+"set directory^=$HOME/.vim_swap//
 
 let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
