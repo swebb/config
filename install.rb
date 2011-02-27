@@ -2,6 +2,9 @@
 
 require 'fileutils'
 
+`curl https://github.com/swebb/oh-my-zsh/raw/master/tools/install.sh -o - | sh`
+`curl https://github.com/swebb/janus/raw/master/bootstrap.sh -o - | sh`
+
 home = File.expand_path("~")
 path = File.join(home, "config")
 backup_path = File.join(path, "backup")
@@ -27,5 +30,3 @@ dot_files.each do |file|
 	FileUtils.ln_s(File.join(path, file), old_file)
 end
 
-`curl https://github.com/swebb/oh-my-zsh/raw/master/tools/install.sh -o - | sh`
-`curl https://github.com/swebb/janus/raw/master/bootstrap.sh -o - | sh`
