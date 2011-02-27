@@ -2,4 +2,4 @@
 
 ## Installation
 
-  `curl http://github.com/swebb/config/raw/master/install.rb -o - | ruby`
+  `curl https://github.com/swebb/config/raw/master/install.rb -o - | ruby`
