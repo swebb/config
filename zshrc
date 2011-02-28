@@ -19,7 +19,7 @@ plugins=(git vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 #Home machine (Linux)
-if [[ "$HOST" == "two" ]]; then
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	#change colors
 	eval `dircolors -b ~/.dir_colors`
 #Work machine (OSX)
