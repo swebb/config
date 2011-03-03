@@ -7,6 +7,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls='/bin/ls --color=auto --group-directories-first'
 	#alias gvim='/usr/bin/gvim -p $* >& /dev/null'
 	gvim() { /usr/bin/gvim --servername GVIM --remote-tab "$@" }
+	alias rc='rails console'
 
 	#use the associated gnome application to open a file
 	alias open="gnome-open"

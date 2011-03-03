@@ -50,9 +50,6 @@ prompt='%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} %{$fg_bold[green]
 
 source ~/.alias-zshrc
 
-# This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 # The following lines were added by compinstall
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -75,3 +72,7 @@ bindkey -M menuselect '^[0' beginning-of-line
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+
+# This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
