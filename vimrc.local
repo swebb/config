@@ -71,10 +71,14 @@ map <F1> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
 
 "set the width for tabs
-"set tabstop=4
+set tabstop=8
 set softtabstop=2
 set shiftwidth=2
-set noexpandtab
+"set noexpandtab
+
+"display tabs as symbols
+set list
+set listchars=tab:>>
 
 "for spell checking.  Use: SPCheck to enable/disable
 "let dialect='UK'
