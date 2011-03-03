@@ -121,8 +121,8 @@ elseif has('unix')
 	map <C-h> :tabprevious<cr>
 	map <C-l> :tabnext<cr>
 	map <C-t> :tabnew<cr>
-	imap <C-h> :tabprevious<cr>
-	imap <C-l> :tabnext<cr>
+	imap <C-h> <ESC>:tabprevious<cr>
+	imap <C-l> <ESC>:tabnext<cr>
 	imap <C-t> <ESC>:tabnew<cr> 
 
 endif
