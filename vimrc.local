@@ -70,15 +70,19 @@ set nowrap
 map <F1> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
 
-"set the width for tabs
-set tabstop=8
-set softtabstop=2
-set shiftwidth=2
-"set noexpandtab
+"set tabs to 4 spaces
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+
+"set the width for tabs (ruby)
+" set tabstop=8
+" set softtabstop=2
+" set shiftwidth=2
 
 "display tabs as symbols
-set list
-set listchars=tab:>>
+"set list
+"set listchars=tab:>>
 
 "for spell checking.  Use: SPCheck to enable/disable
 "let dialect='UK'
