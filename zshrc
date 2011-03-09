@@ -14,7 +14,7 @@ export CASE_SENSITIVE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vi-mode)
+plugins=(vi-mode ruby git-flow-completion)
 
 source $ZSH/oh-my-zsh.sh
 
