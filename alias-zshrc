@@ -16,6 +16,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 	alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
 	alias umount-iphone="fusermount -u /media/iPhone"
+	alias mongo-fix"sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
 
 #Work machine (OSX)
 elif [[ "$HOST" == "Steven-Webbs-iMac.local" ]]; then
