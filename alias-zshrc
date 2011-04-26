@@ -12,6 +12,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
 
+	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
+
 	alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
 	alias umount-iphone="fusermount -u /media/iPhone"
 
@@ -53,7 +55,7 @@ fi
 	g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
 	gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
 	#alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
-	alias make="clear; slash; /usr/bin/make $*"
+	make() { clear; slash; /usr/bin/make -j "$@" }
 	alias m="clear; slash; /usr/bin/make |& more"
 	ddd() { /usr/bin/ddd "$@" & }
 
