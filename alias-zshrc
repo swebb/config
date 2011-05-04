@@ -13,6 +13,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
 
+	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
+
+	alias mount-one="ssh one pmount /dev/sda1; ssh one pmount /dev/sda2; sshfs one:/media/sda1 /media/one-backup; sshfs one:/media/sda2 /media/one-media"
+	alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-backup; ssh one pumount /media/sda1; ssh one pumount /media/sda2"
+
 	alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
 	alias umount-iphone="fusermount -u /media/iPhone"
 	alias mongo-fix"sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
@@ -55,7 +60,7 @@ fi
 	g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
 	gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
 	#alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
-	alias make="clear; slash; /usr/bin/make $*"
+	make() { clear; slash; /usr/bin/make -j "$@" }
 	alias m="clear; slash; /usr/bin/make |& more"
 	ddd() { /usr/bin/ddd "$@" & }
 
