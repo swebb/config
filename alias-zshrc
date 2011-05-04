@@ -7,6 +7,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls='/bin/ls --color=auto --group-directories-first'
 	#alias gvim='/usr/bin/gvim -p $* >& /dev/null'
 	gvim() { /usr/bin/gvim --servername GVIM --remote-tab "$@" }
+	alias mate=gvim
 	alias rc='rails console'
 
 	#use the associated gnome application to open a file
@@ -32,7 +33,7 @@ fi
 	alias slash="echo=///////////////////////////////////////////////////////////////"
 
 	#recursive grep without svn directories
-	alias g="egrep --exclude=\*.svn\* -r -n "
+	alias g="egrep --exclude=\*.git\* -r -n "
 
 	#create a drop shadow
 	dropshadow() {convert $1 \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -mosaic $2}

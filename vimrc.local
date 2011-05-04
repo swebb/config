@@ -95,6 +95,9 @@ set noexpandtab
 "let spell_language = "en_GB"
 "let spell_auto_type = ""
 
+set spelllang=en_au
+set spell
+
 filetype plugin on
 
 "enable folding
