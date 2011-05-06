@@ -9,6 +9,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	gvim() { /usr/bin/gvim --servername GVIM --remote-tab "$@" }
 	alias mate=gvim
 	alias rc='rails console'
+	alias rr='touch tmp/restart.txt'
 
 	#use the associated gnome application to open a file
 	alias open="gnome-open"

@@ -71,9 +71,9 @@ map <F1> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
 
 "set tabs to 4 spaces
-set softtabstop=2
-set shiftwidth=2
-set noexpandtab
+"set softtabstop=2
+"set shiftwidth=2
+"set expandtab
 
 "set the width for tabs (ruby)
 " set tabstop=8
