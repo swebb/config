@@ -166,3 +166,7 @@ cabbrev help tab help
 
 "disable alt keys for menu items
 set winaltkeys=no
+
+"Command-T bindings
+nmap <C-Space> :CommandT<CR>
+"nmap <silent> <Leader>b :CommandTBuffer<CR>
