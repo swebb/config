@@ -6,7 +6,14 @@
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls='/bin/ls --color=auto --group-directories-first'
 	#alias gvim='/usr/bin/gvim -p $* >& /dev/null'
-	gvim() { /usr/bin/gvim --servername GVIM --remote-tab "$@" }
+	gvim()
+  {
+    if [[ $# -ge 1 ]]; then
+      /usr/bin/gvim --servername GVIM --remote-tab "$@"
+    else
+      /usr/bin/gvim --servername GVIM
+    fi
+  }
 	alias mate=gvim
 	alias rc='rails console'
 	alias rr='touch tmp/restart.txt'
@@ -34,7 +41,17 @@ fi
 #//Useful aliases
 #//////////////////////////////////////////////////////////////////////
 	alias rm='/bin/rm -i'
-	alias nautilus='/usr/bin/nautilus .'
+
+	nautilus()
+  {
+    if [[ $# -gt 1 ]]; then
+      echo "Error! Too many arguments!"
+    elif [[ $# -eq 1 ]]; then
+      /usr/bin/nautilus "file://$@"
+    else
+      /usr/bin/nautilus "file://$PWD"
+    fi
+  }
 
 	#really useful when compiling.  Used bty other aliases.
 	alias slash="echo=///////////////////////////////////////////////////////////////"
