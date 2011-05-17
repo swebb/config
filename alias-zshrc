@@ -79,7 +79,7 @@ fi
 	g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
 	gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
 	#alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
-	make() { clear; slash; /usr/bin/make -j "$@" }
+	make() { reset; /usr/bin/make -j "$@" }
 	alias m="clear; slash; /usr/bin/make |& more"
 	ddd() { /usr/bin/ddd "$@" & }
 
