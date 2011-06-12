@@ -134,8 +134,6 @@ elseif has('unix')
 
 endif
 
-colorscheme steve
-
 "Use ctrl-n to turn highlighting of searches on and off.
 nmap <silent> <C-n> <Esc>:call ToggleHLSearch()<CR>.
 imap <silent> <C-n> <Esc>:call ToggleHLSearch()<CR>.
