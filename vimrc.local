@@ -165,5 +165,4 @@ cabbrev help tab help
 "disable alt keys for menu items
 set winaltkeys=no
 
-"use ctrl-o for command-T
 nmap <silent> <C-o> <Esc>:CommandT<CR>
