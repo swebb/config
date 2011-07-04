@@ -18,14 +18,25 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias rc='rails console'
 	alias rr='touch tmp/restart.txt'
 
+	install() { sudo apt-get install "$@" }
+	remove() { sudo apt-get remove "$@" }
+	purge() { sudo apt-get remove "$@" }
+	search() { apt-cache search "$@" | grep -i "$@" }
+
+  fix_perms()
+  {
+    sudo find "$@" -type d -exec chmod 755 {} \;
+    sudo find "$@" -type f -exec chmod 644 {} \;
+  }
+
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
 
 	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
 	alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
 
-	alias mount-one="ssh one pmount /dev/sda1; ssh one pmount /dev/sda2; sshfs one:/media/sda1 /media/one-backup; sshfs one:/media/sda2 /media/one-media"
-	alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-backup; ssh one pumount /media/sda1; ssh one pumount /media/sda2"
+	alias mount-one="sshfs one:/media/sda1 /media/one-backup; sshfs one:/media/sda2 /media/one-media; sshfs one:/home/media /media/one-home"
+	alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-backup; fusermount -u /media/one-home"
 
 	alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
 	alias umount-iphone="fusermount -u /media/iPhone"
