@@ -5,13 +5,12 @@
 #Home machine (Linux)
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls='/bin/ls --color=auto --group-directories-first'
-	#alias gvim='/usr/bin/gvim -p $* >& /dev/null'
 	gvim()
   {
     if [[ $# -ge 1 ]]; then
-      /usr/bin/gvim --servername GVIM --remote-tab "$@"
+      (unset GEM_PATH; unset GEM_HOME; command gvim --servername GVIM --remote-tab "$@" >& /dev/null)
     else
-      /usr/bin/gvim --servername GVIM
+      (unset GEM_PATH; unset GEM_HOME; command gvim --servername GVIM >& /dev/null)
     fi
   }
 	alias mate=gvim
