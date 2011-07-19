@@ -30,6 +30,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
+	alias shutdown="gnome-session-quit --power-off --force --no-prompt"
 
 	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
 	alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
