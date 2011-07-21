@@ -5,13 +5,12 @@
 #Home machine (Linux)
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls='/bin/ls --color=auto --group-directories-first'
-	#alias gvim='/usr/bin/gvim -p $* >& /dev/null'
 	gvim()
   {
     if [[ $# -ge 1 ]]; then
-      /usr/bin/gvim --servername GVIM --remote-tab "$@"
+      (unset GEM_PATH; unset GEM_HOME; command gvim --servername GVIM --remote-tab "$@" >& /dev/null)
     else
-      /usr/bin/gvim --servername GVIM
+      (unset GEM_PATH; unset GEM_HOME; command gvim --servername GVIM >& /dev/null)
     fi
   }
 	alias mate=gvim
@@ -31,6 +30,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
+	alias shutdown="gnome-session-quit --power-off --force --no-prompt"
 
 	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
 	alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
