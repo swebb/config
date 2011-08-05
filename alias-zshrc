@@ -21,6 +21,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	remove() { sudo apt-get remove "$@" }
 	purge() { sudo apt-get remove "$@" }
 	search() { apt-cache search "$@" | grep -i "$@" }
+	show() { apt-get show "$@" }
 
   fix_perms()
   {
@@ -94,7 +95,7 @@ fi
 	alias m="clear; slash; /usr/bin/make |& more"
 	ddd() { /usr/bin/ddd "$@" & }
 
-	alias beep="notify-send 'beep'; mplayer /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"	
+	alias beep="notify-send 'beep'; mplayer -volume 50 /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"	
 
 #//////////////////////////////////////////////////////////////////////
 #//Background aliases
