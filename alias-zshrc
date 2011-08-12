@@ -21,6 +21,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	remove() { sudo apt-get remove "$@" }
 	purge() { sudo apt-get remove "$@" }
 	search() { apt-cache search "$@" | grep -i "$@" }
+	show() { apt-cache show "$@" }
 
   fix_perms()
   {
