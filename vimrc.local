@@ -43,8 +43,8 @@ set showmatch
 "automatically disables ignore case when pattern has upper case characters
 set smartcase
 
-"set's the maximum number of characters on a line
-"set to 0 to disable
+"line wrapping
+set wrap
 set textwidth=0
 set wrapmargin=0
 
@@ -62,8 +62,6 @@ imap <F3> //////////////////////////////////////////////////////////////////////
 map <F4> i######################################################################<ESC>
 imap <F4> ######################################################################
 
-"line wrapping
-set wrap
 
 "for help tags (used for spell checking)
 "helptags ~/.vim/doc
@@ -167,3 +165,7 @@ cabbrev help tab help
 set winaltkeys=no
 
 nmap <silent> <C-o> <Esc>:CommandT<CR>
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
