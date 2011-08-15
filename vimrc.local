@@ -46,6 +46,7 @@ set smartcase
 "set's the maximum number of characters on a line
 "set to 0 to disable
 set textwidth=0
+set wrapmargin=0
 
 "disable the warning beeps, flash in stead
 set visualbell
@@ -61,8 +62,8 @@ imap <F3> //////////////////////////////////////////////////////////////////////
 map <F4> i######################################################################<ESC>
 imap <F4> ######################################################################
 
-"stop linewrapping
-set nowrap
+"line wrapping
+set wrap
 
 "for help tags (used for spell checking)
 "helptags ~/.vim/doc
