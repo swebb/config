@@ -17,11 +17,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias rc='rails console'
 	alias rr='touch tmp/restart.txt'
 
-	install() { sudo apt-get install "$@" }
-	remove() { sudo apt-get remove "$@" }
-	purge() { sudo apt-get remove "$@" }
-	search() { apt-cache search "$@" | grep -i "$@" }
-	show() { apt-get show "$@" }
+	install() { sudo apt-get install "$@"            }
+	remove()  { sudo apt-get remove "$@"             }
+	purge()   { sudo apt-get remove "$@"             }
+	search()  { apt-cache search "$@" | grep -i "$@" }
+	show()    { apt-cache show "$@"                  }
 
   fix_perms()
   {
@@ -31,7 +31,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 	#use the associated gnome application to open a file
 	alias open="gnome-open"
-	alias shutdown="gnome-session-quit --power-off --force --no-prompt"
+	alias night="sleep 30m; gnome-session-quit --power-off --force --no-prompt"
 
 	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
 	alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
