@@ -17,7 +17,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias rc='rails console'
 	alias rr='touch tmp/restart.txt'
 
-  alias dtach="/home/steve/bin/dtach -A /tmp/dtach /usr/bin/zsh"
+  alias dtach="command dtach -A /tmp/dtach /usr/bin/zsh"
 
 	install() { sudo apt-get install "$@" }
 	remove() { sudo apt-get remove "$@" }
