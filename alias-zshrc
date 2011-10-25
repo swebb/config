@@ -34,12 +34,15 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   backup()
   {
     ssh one sudo cryptsetup luksOpen /dev/sdb1 steve-backup < ~/bin/backup-key
+    ssh one sudo cryptsetup luksOpen /dev/sdc1 steve-mirror < ~/bin/backup-key
     ssh one mount /media/steve-backup
-    sshfs one:/media/steve-backup /media/one-backup
-    backintime-gnome
-    fusermount -u /media/one-backup
+    ssh one mount /media/steve-mirror
+    ~/bin/backup.sh
+    ssh one rsync -aH --exclude 'lost+found' /media/steve-backup/ /media/steve-mirror/
+    ssh one umount /media/steve-mirror
     ssh one umount /media/steve-backup
     ssh one sudo cryptsetup luksClose steve-backup
+    ssh one sudo cryptsetup luksClose steve-mirror
   }
 
   #use the associated gnome application to open a file
@@ -51,8 +54,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
   alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
 
-  alias mount-one="sshfs one:/media/sda1 /media/one-backup; sshfs one:/media/sda2 /media/one-media; sshfs one:/home/media /media/one-home"
-  alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-backup; fusermount -u /media/one-home"
+  alias mount-one="sshfs one:/media/media /media/one-media; sshfs debian-transmission@one:/home/debian-transmission /media/one-home"
+  alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-home"
 
   alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
   alias umount-iphone="fusermount -u /media/iPhone"
