@@ -4,8 +4,8 @@
 #
 #Home machine (Linux)
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-	alias ls='/bin/ls --color=auto --group-directories-first'
-	gvim()
+  alias ls='/bin/ls --color=auto --group-directories-first'
+  gvim()
   {
     if [[ $# -ge 1 ]]; then
       (unset GEM_PATH GEM_HOME; command gvim --servername GVIM --remote-tab "$@" >& /dev/null)
@@ -13,15 +13,17 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       (unset GEM_PATH GEM_HOME; command gvim --servername GVIM >& /dev/null)
     fi
   }
-	alias mate=gvim
-	alias rc='rails console'
-	alias rr='touch tmp/restart.txt'
+  alias mate=gvim
+  alias rc='rails console'
+  alias rr='touch tmp/restart.txt'
 
-	install() { sudo apt-get install "$@"            }
-	remove()  { sudo apt-get remove "$@"             }
-	purge()   { sudo apt-get remove "$@"             }
-	search()  { apt-cache search "$@" | grep -i "$@" }
-	show()    { apt-cache show "$@"                  }
+  alias dtach="command dtach -A /tmp/dtach /usr/bin/zsh"
+
+  install() { sudo apt-get install "$@" }
+  remove() { sudo apt-get remove "$@" }
+  purge() { sudo apt-get remove "$@" }
+  search() { apt-cache search "$@" | grep -i "$@" }
+  show() { apt-cache show "$@" }
 
   fix_perms()
   {
@@ -29,32 +31,48 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo find "$@" -type f -exec chmod 644 {} \;
   }
 
-	#use the associated gnome application to open a file
-	alias open="gnome-open"
-	alias night="sleep 30m; gnome-session-quit --power-off --force --no-prompt"
+  backup()
+  {
+    ssh one sudo cryptsetup luksOpen /dev/sdb1 steve-backup < ~/bin/backup-key
+    ssh one sudo cryptsetup luksOpen /dev/sdc1 steve-mirror < ~/bin/backup-key
+    ssh one mount /media/steve-backup
+    ssh one mount /media/steve-mirror
+    ~/bin/backup.sh
+    ssh one rsync -aH --exclude 'lost+found' /media/steve-backup/ /media/steve-mirror/
+    ssh one umount /media/steve-mirror
+    ssh one umount /media/steve-backup
+    ssh one sudo cryptsetup luksClose steve-backup
+    ssh one sudo cryptsetup luksClose steve-mirror
+  }
 
-	alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
-	alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
+  #use the associated gnome application to open a file
+  alias open="gnome-open"
+  alias night="sleep 30m; gnome-session-quit --power-off --force --no-prompt"
 
-	alias mount-one="sshfs one:/media/sda1 /media/one-backup; sshfs one:/media/sda2 /media/one-media; sshfs one:/home/media /media/one-home"
-	alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-backup; fusermount -u /media/one-home"
+  alias rsync-mirror="rsync -aH /media/steve-backup/ /media/steve-mirror/"
 
-	alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
-	alias umount-iphone="fusermount -u /media/iPhone"
-	alias mongo-fix"sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
+  alias minecraft="java -Xmx1024M -Xms512M -cp ~/bin/class/minecraft.jar net.minecraft.LauncherFrame"
+  alias minecraft-server="cd ~/bin/class; java -Xmx1024M -Xms512M -jar ~/bin/class/minecraft_server.jar nogui"
+
+  alias mount-one="sshfs one:/media/media /media/one-media; sshfs debian-transmission@one:/home/debian-transmission /media/one-home"
+  alias umount-one="fusermount -u /media/one-media; fusermount -u /media/one-home"
+
+  alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
+  alias umount-iphone="fusermount -u /media/iPhone"
+  alias mongo-fix"sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
 
 #Work machine (OSX)
 elif [[ "$HOST" == "Steven-Webbs-iMac.local" ]]; then
-	alias gvim='/usr/local/bin/mvim -p $* >& /dev/null'
-	alias gvimdiff='/usr/local/bin/mvim -d $* >& /dev/null'
+  alias gvim='/usr/local/bin/mvim -p $* >& /dev/null'
+  alias gvimdiff='/usr/local/bin/mvim -d $* >& /dev/null'
 fi
 
 #//////////////////////////////////////////////////////////////////////
 #//Useful aliases
 #//////////////////////////////////////////////////////////////////////
-	alias rm='/bin/rm -i'
+  alias rm='/bin/rm -i'
 
-	nautilus()
+  nautilus()
   {
     if [[ $# -gt 1 ]]; then
       echo "Error! Too many arguments!"
@@ -65,35 +83,35 @@ fi
     fi
   }
 
-	#really useful when compiling.  Used bty other aliases.
-	alias slash="echo=///////////////////////////////////////////////////////////////"
+  #really useful when compiling. Used bty other aliases.
+  alias slash="echo=///////////////////////////////////////////////////////////////"
 
-	#recursive grep without svn directories
-	alias g="egrep --exclude=\*.git\* -r -n "
+  #recursive grep without svn directories
+  alias g="egrep --exclude=\*.git\* -r -n "
 
-	#create a drop shadow
-	dropshadow() {convert $1 \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -mosaic $2}
+  #create a drop shadow
+  dropshadow() {convert $1 \( +clone -background black -shadow 80x3+5+5 \) +swap -background none -mosaic $2}
 
-	#java stuff
-	#alias java="slash; $javaversion/bin/java $*"
-	#alias javac="slash; $javaversion/bin/javac $* |& more"
-	#alias javadoc="slash; $javaversion/bin/javadoc $* |& more"
-	#alias appletviewer="slash; $javaversion/bin/appletviewer $*"
-	#setenv CLASSPATH .:$HOME/bin/Class:$HOME/bin/Class/junit4.1/junit-4.1.jar:$HOME/bin/Class/junit4.1:/usr/local/share/classes:$HOME/h/java/
+  #java stuff
+  #alias java="slash; $javaversion/bin/java $*"
+  #alias javac="slash; $javaversion/bin/javac $* |& more"
+  #alias javadoc="slash; $javaversion/bin/javadoc $* |& more"
+  #alias appletviewer="slash; $javaversion/bin/appletviewer $*"
+  #setenv CLASSPATH .:$HOME/bin/Class:$HOME/bin/Class/junit4.1/junit-4.1.jar:$HOME/bin/Class/junit4.1:/usr/local/share/classes:$HOME/h/java/
 
-	#use Great Britan spelling for aspell
-	#setenv ASPELL_CONF "master en_GB"
-	export ASPELL_CONF="lang en_GB"
-	#I usually only use this for html
-	alias aspell="/usr/bin/aspell --mode=html -c"
+  #use Great Britan spelling for aspell
+  #setenv ASPELL_CONF "master en_GB"
+  export ASPELL_CONF="lang en_GB"
+  #I usually only use this for html
+  alias aspell="/usr/bin/aspell --mode=html -c"
 
-	#alias -r g++="clear; (/usr/bin/g++ -g -Wall -o main $*) 2>&1 | more"
-	g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
-	gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
-	#alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
-	make() { reset; /usr/bin/make -j "$@" }
-	alias m="clear; slash; /usr/bin/make |& more"
-	ddd() { /usr/bin/ddd "$@" & }
+  #alias -r g++="clear; (/usr/bin/g++ -g -Wall -o main $*) 2>&1 | more"
+  g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
+  gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
+  #alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
+  make() { reset; /usr/bin/make -j "$@" }
+  alias m="clear; slash; /usr/bin/make |& more"
+  ddd() { /usr/bin/ddd "$@" & }
 
 	alias beep="notify-send 'beep'; mplayer -volume 50 /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"	
 
@@ -101,20 +119,20 @@ fi
 #//Background aliases
 #//////////////////////////////////////////////////////////////////////
 
-	#acrobat reader
-	evince() {/usr/bin/evince $* &}
-	gftp() {/usr/bin/gftp $* &}
-	gimp() {/usr/bin/gimp $* &}
-	inkscape() {/usr/bin/inkscape $* &}
+  #acrobat reader
+  evince() {/usr/bin/evince $* &}
+  gftp() {/usr/bin/gftp $* &}
+  gimp() {/usr/bin/gimp $* &}
+  inkscape() {/usr/bin/inkscape $* &}
 
-	#for eog (open the current directory)
-	alias eog="/usr/bin/eog . &"
+  #for eog (open the current directory)
+  alias eog="/usr/bin/eog . &"
 
-	#for region 1 dvds
-	#setenv DVDCSS_METHOD key
-	#setenv DVDCSS_RAW_DEVICE /dev/hdc
-	#setenv DVDCSS_VERBOSE 2
+  #for region 1 dvds
+  #setenv DVDCSS_METHOD key
+  #setenv DVDCSS_RAW_DEVICE /dev/hdc
+  #setenv DVDCSS_VERBOSE 2
 
-	#for gnuplot
-	#setenv GDFONTPATH /usr/share/fonts/truetype/freefont/
-	#alias gnuplot='/usr/local/bin/gnuplot --persist $*'
+  #for gnuplot
+  #setenv GDFONTPATH /usr/share/fonts/truetype/freefont/
+  #alias gnuplot='/usr/local/bin/gnuplot --persist $*'
