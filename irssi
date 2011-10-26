@@ -1,21 +1,39 @@
-chatnets = {
-  FreeNode = { type = "IRC"; };
-};
+
+
 
 servers = (
+  {
+    address = "localhost";
+    chatnet = "Campfire";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+    password = "thefrontiergroup1:5ca5c241af42c040554dec6059461f0b2ac4408a";
+  },
   {
     address = "irc.freenode.net";
     chatnet = "FreeNode";
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
-    autoconnect = "yes";
+    autoconnect = "no";
   }
 );
 
 
 channels = (
-  { name = "#tfgdev"; chatnet = "FreeNode"; autojoin = "yes"; password = "bogglesnap"; }
+  {
+    name = "#tfg_discussions";
+    chatnet = "Campfire";
+    autojoin = "yes";
+  },
+  {
+    name = "#tfgdev";
+    chatnet = "FreeNode";
+    autojoin = "yes";
+    password = "bogglesnap";
+  }
 );
 
 aliases = {
@@ -179,6 +197,7 @@ statusbar = {
     };
   };
 };
+
 settings = {
   core = {
     real_name = "Steven Webb";
@@ -187,3 +206,4 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
+chatnets = { Campfire = { type = "IRC"; }; FreeNode = { type = "IRC"; }; };
