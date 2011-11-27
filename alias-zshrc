@@ -126,7 +126,7 @@ fi
   alias m="clear; slash; /usr/bin/make |& more"
   ddd() { /usr/bin/ddd "$@" & }
 
-  alias beep="notify-send 'beep'; mplayer /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"  
+	alias beep="notify-send 'beep'; mplayer -volume 50 /usr/share/sounds/ubuntu/stereo/desktop-logout.ogg"	
 
 #//////////////////////////////////////////////////////////////////////
 #//Background aliases
