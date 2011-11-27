@@ -5,14 +5,7 @@
 #Home machine (Linux)
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls='/bin/ls --color=auto --group-directories-first'
-  gvim()
-  {
-    if [[ $# -ge 1 ]]; then
-      (unset GEM_PATH; unset GEM_HOME; command gvim --servername GVIM --remote-tab "$@" >& /dev/null)
-    else
-      (unset GEM_PATH; unset GEM_HOME; command gvim --servername GVIM >& /dev/null)
-    fi
-  }
+
   alias mate=gvim
   alias rc='rails console'
   alias rr='touch tmp/restart.txt'
@@ -60,6 +53,25 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
   alias umount-iphone="fusermount -u /media/iPhone"
   alias mongo-fix"sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
+
+  #my laptop
+  if [[ "$HOST" == "two" ]]; then
+    mount-backup()
+    {
+      ssh one sudo cryptsetup luksOpen /dev/sdb1 steve-backup < ~/bin/backup-key
+      ssh one sudo cryptsetup luksOpen /dev/sdc1 steve-mirror < ~/bin/backup-key
+      ssh one mount /media/steve-backup
+      ssh one mount /media/steve-mirror
+    }
+
+    umount-backup()
+    {
+      ssh one umount /media/steve-mirror
+      ssh one umount /media/steve-backup
+      ssh one sudo cryptsetup luksClose steve-backup
+      ssh one sudo cryptsetup luksClose steve-mirror
+    }
+  fi
 
 #Work machine (OSX)
 elif [[ "$HOST" == "Steven-Webbs-iMac.local" ]]; then
@@ -109,7 +121,8 @@ fi
   g++() { clear; ~/bin/g++ -g -Wall -o main "$@" 2>&1 | more; }
   gcc() { clear; ~/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main "$@" 2>&1 | more; }
   #alias gcc="clear; /usr/bin/gcc -g -Wall -ansi -pedantic -std=c99 -o main $* |& more"
-  make() { reset; /usr/bin/make -j "$@" }
+  # make() { reset; /usr/bin/make -j "$@" }
+  make() { reset; /usr/bin/make }
   alias m="clear; slash; /usr/bin/make |& more"
   ddd() { /usr/bin/ddd "$@" & }
 
