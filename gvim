@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ -s "/home/steve/.rvm/environments/ruby-1.9.3-p0@vim" ]]
+then
+  source "/home/steve/.rvm/environments/ruby-1.9.3-p0@vim"
+    if [[ $# -ge 1 ]]; then
+      /usr/bin/gvim --servername GVIM --remote-tab "$@" >& /dev/null
+    else
+      /usr/bin/gvim --servername GVIM >& /dev/null
+    fi
+else
+  echo "ERROR: Missing RVM environment file: '/home/steve/.rvm/environments/ruby-1.9.3-p0@vim'" >&2
+  exit 1
+fi
+
