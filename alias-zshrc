@@ -6,6 +6,15 @@
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls='/bin/ls --color=auto --group-directories-first'
 
+  gvim()
+  {
+    if [[ $# -ge 1 ]]; then
+      (unset GEM_PATH GEM_HOME; command gvim --servername GVIM --remote-tab "$@" >& /dev/null)
+    else
+      (unset GEM_PATH GEM_HOME; command gvim --servername GVIM >& /dev/null)
+    fi
+  }
+
   alias mate=gvim
   alias rc='rails console'
   alias rr='touch tmp/restart.txt'
