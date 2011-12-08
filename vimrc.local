@@ -105,7 +105,7 @@ set foldmethod=indent
 if has('win32')
 		"windows config
 elseif has('mac')
-	set guifont=Menlo:h12
+	set guifont=Menlo:h16
 
 	nmap <C-h> :wincmd h<cr>
 	nmap <C-l> :wincmd l<cr>
@@ -130,7 +130,6 @@ elseif has('unix')
 	imap <C-h> <ESC>:tabprevious<cr>
 	imap <C-l> <ESC>:tabnext<cr>
 	imap <C-t> <ESC>:tabnew<cr> 
-
 endif
 
 "Use ctrl-n to turn highlighting of searches on and off.
