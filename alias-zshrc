@@ -6,6 +6,15 @@
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls='/bin/ls --color=auto --group-directories-first'
 
+  gvim()
+  {
+    if [[ $# -ge 1 ]]; then
+      (unset GEM_PATH GEM_HOME; command gvim --servername GVIM --remote-tab "$@" >& /dev/null)
+    else
+      (unset GEM_PATH GEM_HOME; command gvim --servername GVIM >& /dev/null)
+    fi
+  }
+
   alias mate=gvim
   alias rc='rails console'
   alias rr='touch tmp/restart.txt'
@@ -52,7 +61,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
   alias mount-iphone="sshfs iphone:/var/mobile/Media /media/iPhone"
   alias umount-iphone="fusermount -u /media/iPhone"
-  alias mongo-fix"sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
+  alias mongo-fix="sudo rm -f /var/lib/mongodb/mongod.lock; sudo start mongodb"
+  alias irssi="camper_van >& /dev/null &; sleep 5; command irssi"
 
   #my laptop
   if [[ "$HOST" == "two" ]]; then

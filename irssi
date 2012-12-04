@@ -1,21 +1,36 @@
-chatnets = {
-  FreeNode = { type = "IRC"; };
-};
-
 servers = (
+  {
+    address = "localhost";
+    chatnet = "Campfire";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
+    password = "thefrontiergroup1:5ca5c241af42c040554dec6059461f0b2ac4408a";
+  },
   {
     address = "irc.freenode.net";
     chatnet = "FreeNode";
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
-    autoconnect = "yes";
+    autoconnect = "no";
   }
 );
 
 
 channels = (
-  { name = "#tfgdev"; chatnet = "FreeNode"; autojoin = "yes"; password = "bogglesnap"; }
+  { 
+    name = "#tfg_discussions";
+    chatnet = "Campfire";
+    autojoin = "yes";
+  },
+  {
+    name = "#tfgdev";
+    chatnet = "FreeNode";
+    autojoin = "yes";
+    password = "bogglesnap";
+  }
 );
 
 aliases = {
@@ -127,7 +142,6 @@ statusbar = {
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
-        act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -177,8 +191,16 @@ statusbar = {
         topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
+    awl_0 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
+
 settings = {
   core = {
     real_name = "Steven Webb";
@@ -186,4 +208,13 @@ settings = {
     nick = "Steve_W";
   };
   "fe-text" = { actlist_sort = "refnum"; };
+  "perl/core/scripts" = {
+    awl_display_key = "= $N$H$C$S";
+    awl_block = "-15";
+  };
 };
+chatnets = { Campfire = { type = "IRC"; }; FreeNode = { type = "IRC"; }; };
+keyboard = (
+  { key = "meta-l"; id = "command"; data = "window next"; },
+  { key = "meta-h"; id = "command"; data = "window prev"; }
+);
