@@ -154,9 +154,9 @@ let g:SuperTabMappingForward = '<c-space>'
 let g:SuperTabMappingBackward = '<s-c-space>'
 
 "set _ as a word boundary
-set iskeyword-=_
+" set iskeyword-=_
 "remove # as a word boundary (#defines)
-set iskeyword+=#
+" set iskeyword+=#
 
 "open help in new tab
 cabbrev help tab help
